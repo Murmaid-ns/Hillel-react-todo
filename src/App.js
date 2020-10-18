@@ -1,26 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import TodoFooter from './components/todo-footer/todo-footer.component';
+import TodoForm from './components/todo-form/todo-form.component';
+import TodoList from './components/todo-list/todo-list.component';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  state = {
+    todos: [
+      {
+        id: 1,
+        text: 'Hi'
+      },
+      {
+        id: 2,
+        text: 'Todo 2'
+      },
+    ],
+  }
+
+  addTodo = (todo) => {
+    this.setState({
+      todos: [...this.state.todos, todo],
+    });
+  }
+
+  render() {
+    const { todos } = this.state;
+
+    return (
+      <div className="todo-app">
+        <TodoForm addTodo={this.addTodo}/>
+
+        <TodoList todos={todos}/>
+
+        <TodoFooter />
+      </div>
+    );
+  }
 }
 
 export default App;
